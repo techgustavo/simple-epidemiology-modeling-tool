@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Chart, registerables, TooltipItem, ChartConfiguration } from 'chart.js'
 import { sirdModel, sirdParams } from '@/utils/sirdModel'
 
@@ -15,6 +15,7 @@ const getChartConfig = (
   p: number[],
   foregroundColor: string,
   gridColor: string,
+  onComplete: () => void,
 ): ChartConfiguration<'line'> => ({
   type: 'line',
   data: {
@@ -50,6 +51,9 @@ const getChartConfig = (
   },
   options: {
     responsive: true,
+    animation: {
+      onComplete,
+    },
     scales: {
       x: {
         title: {
@@ -117,7 +121,16 @@ const getChartConfig = (
 })
 
 export const SirdChart = (params: sirdParams) => {
-  const { beta, gamma, mu, population, infected, recovered, days } = params
+  const {
+    beta,
+    gamma,
+    mu,
+    population,
+    infected,
+    recovered,
+    dead = 0,
+    days,
+  } = params
   const { s, i, r, d, p } = sirdModel({
     beta,
     gamma,
@@ -125,13 +138,17 @@ export const SirdChart = (params: sirdParams) => {
     population,
     infected,
     recovered,
+    dead,
     days,
   })
 
   const labels = Array.from({ length: s.length }, (_, index) => index) // Days 0 to N
 
+  const [isLoading, setIsLoading] = useState(true)
+
   useEffect(() => {
     const canvas = document.getElementById('sirdChart') as HTMLCanvasElement
+
     if (canvas) {
       const ctx = canvas.getContext('2d')
 
@@ -146,7 +163,19 @@ export const SirdChart = (params: sirdParams) => {
 
         const chart = new Chart(
           ctx,
-          getChartConfig(labels, s, i, r, d, p, foregroundColor, gridColor),
+          getChartConfig(
+            labels,
+            s,
+            i,
+            r,
+            d,
+            p,
+            foregroundColor,
+            gridColor,
+            () => {
+              setIsLoading(false)
+            },
+          ),
         )
 
         return () => {
@@ -156,5 +185,16 @@ export const SirdChart = (params: sirdParams) => {
     }
   }, [s, i, r, d, p, labels])
 
-  return <canvas id="sirdChart" className="h-full w-full"></canvas>
+  return (
+    <div className="h-full w-full">
+      {isLoading ? (
+        <div className="flex h-full w-full flex-col items-center justify-center align-middle">
+          <div className="h-12 w-12 animate-spin rounded-full border-4 border-gray-600 border-t-transparent ease-in" />
+          <canvas id="sirdChart" style={{ display: 'none' }} />
+        </div>
+      ) : (
+        <canvas id="sirdChart" />
+      )}
+    </div>
+  )
 }
