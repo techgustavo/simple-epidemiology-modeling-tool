@@ -1,4 +1,4 @@
-export const sirModel = (params: {
+export type sirdParams = {
   beta: number // infection rate
   gamma: number // recovery rate
   mu: number // death rate
@@ -6,7 +6,9 @@ export const sirModel = (params: {
   infected: number
   recovered: number
   days: number // number of days to simulate
-}) => {
+}
+
+export const sirdModel = (params: sirdParams) => {
   const { beta, gamma, mu, population, infected, recovered, days } = params
 
   const susceptible = population - infected - recovered
