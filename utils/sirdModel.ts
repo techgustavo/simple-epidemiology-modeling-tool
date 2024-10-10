@@ -5,18 +5,28 @@ export type sirdParams = {
   population: number
   infected: number
   recovered: number
+  dead?: number
   days: number // number of days to simulate
 }
 
 export const sirdModel = (params: sirdParams) => {
-  const { beta, gamma, mu, population, infected, recovered, days } = params
+  const {
+    beta,
+    gamma,
+    mu,
+    population,
+    infected,
+    recovered,
+    dead = 0,
+    days,
+  } = params
 
-  const susceptible = population - infected - recovered
+  const susceptible = population - infected - recovered - dead
   const s = [susceptible]
   const i = [infected]
   const r = [recovered]
-  const d = [0]
-  const p = [population]
+  const d = [dead]
+  const p = [susceptible + infected + recovered]
 
   for (let day = 1; day <= days; day++) {
     const newInfected = (beta * s[day - 1] * i[day - 1]) / population
