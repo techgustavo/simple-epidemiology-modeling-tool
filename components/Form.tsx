@@ -2,33 +2,26 @@
 
 import { useState } from 'react'
 import { Input } from './Input'
-
-type FormDataType = {
-  beta: number
-  gamma: number
-  mu: number
-  population: number
-  infected: number
-  recovered?: number
-  deceased?: number
-  days: number
-}
+import { useValues } from '@/contexts/values'
+import { sirdParams } from '@/utils/sirdModel'
 
 export const Form = () => {
   const [formData, setFormData] = useState({
     recovered: 0,
-    deceased: 0,
-  } as FormDataType)
+    dead: 0,
+  } as sirdParams)
+
+  const { setValue } = useValues()
 
   return (
     <form
-      className="flex flex-col items-center justify-center gap-5 pb-9 align-middle"
+      className="flex flex-col items-center justify-center gap-6 pb-16 align-middle"
       id="Form"
     >
       <div className="flex gap-5">
         <Input
           name="beta"
-          placeholder="e.g. 0.3"
+          placeholder="1"
           label="&Beta; (infection rate)"
           required
           onChange={(e) => {
@@ -37,7 +30,7 @@ export const Form = () => {
         />
         <Input
           name="gamma"
-          placeholder="e.g. 0.1"
+          placeholder="0.3"
           label="&Gamma; (recovery rate)"
           required
           onChange={(e) => {
@@ -46,7 +39,7 @@ export const Form = () => {
         />
         <Input
           name="mu"
-          placeholder="e.g. 0.5"
+          placeholder="0.1"
           label="&Mu; (death rate)"
           required
           onChange={(e) => {
@@ -55,7 +48,7 @@ export const Form = () => {
         />
         <Input
           name="population"
-          placeholder="e.g. 1000"
+          placeholder="1000"
           label="Population"
           required
           onChange={(e) => {
@@ -66,7 +59,7 @@ export const Form = () => {
       <div className="flex gap-5">
         <Input
           name="infected"
-          placeholder="e.g. 1"
+          placeholder="1"
           label="Infected"
           required
           onChange={(e) => {
@@ -75,7 +68,7 @@ export const Form = () => {
         />
         <Input
           name="recovered"
-          placeholder="e.g. 20"
+          placeholder="100"
           label="Recovered (optional)"
           onChange={(e) => {
             setFormData({
@@ -88,12 +81,12 @@ export const Form = () => {
         />
         <Input
           name="deceased"
-          placeholder="e.g. 10"
+          placeholder="300"
           label="Deceased (optional)"
           onChange={(e) => {
             setFormData({
               ...formData,
-              deceased: !isNaN(parseFloat(e.target.value))
+              dead: !isNaN(parseFloat(e.target.value))
                 ? parseFloat(e.target.value)
                 : 0,
             })
@@ -101,7 +94,7 @@ export const Form = () => {
         />
         <Input
           name="days"
-          placeholder="e.g. 30"
+          placeholder="50"
           label="Days"
           required
           onChange={(e) => {
@@ -110,13 +103,13 @@ export const Form = () => {
         />
       </div>
       <button
-        className="w-1/2 rounded border border-gray-600 bg-gray-600 p-3 text-gray-100 transition-colors duration-75 hover:bg-gray-100 hover:text-gray-600"
+        className="w-1/4 rounded border border-gray-600 px-3 py-2 text-gray-600 transition-colors duration-75 hover:bg-gray-100"
         onClick={(e) => {
           const form = document.getElementById('Form') as HTMLFormElement | null
           if (form) {
             const validity = form.checkValidity()
             if (validity) {
-              console.log(formData)
+              setValue(formData)
               e.preventDefault()
             }
           }
