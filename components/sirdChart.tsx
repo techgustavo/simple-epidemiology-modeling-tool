@@ -127,7 +127,7 @@ export const SirdChart = (params: sirdParams) => {
     mu,
     population,
     infected,
-    recovered,
+    recovered = 0,
     dead = 0,
     days,
   } = params
