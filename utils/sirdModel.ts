@@ -4,7 +4,7 @@ export type sirdParams = {
   mu: number // death rate
   population: number
   infected: number
-  recovered: number
+  recovered?: number
   dead?: number
   days: number // number of days to simulate
 }
@@ -16,7 +16,7 @@ export const sirdModel = (params: sirdParams) => {
     mu,
     population,
     infected,
-    recovered,
+    recovered = 0,
     dead = 0,
     days,
   } = params
