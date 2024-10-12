@@ -1,11 +1,10 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { sirdModel, sirdParams } from '@/utils/sirdModel'
+import { sirdModel } from '@/utils/sirdModel'
 import { Chart, registerables, TooltipItem, ChartConfiguration } from 'chart.js'
 import zoomPlugin from 'chartjs-plugin-zoom'
-
-Chart.register(...registerables, zoomPlugin)
+import { useValues } from '@/contexts/values'
 
 const getChartConfig = (
   labels: number[],
@@ -84,7 +83,7 @@ const getChartConfig = (
       },
     },
     plugins: {
-      zoom: {
+      /* zoom: {
         zoom: {
           wheel: {
             enabled: true,
@@ -94,7 +93,7 @@ const getChartConfig = (
           },
           mode: 'xy',
         },
-      },
+      }, */
       legend: {
         labels: {
           usePointStyle: true,
@@ -132,27 +131,12 @@ const getChartConfig = (
   },
 })
 
-export const SirdChart = (params: sirdParams) => {
-  const {
-    beta,
-    gamma,
-    mu,
-    population,
-    infected,
-    recovered = 0,
-    dead = 0,
-    days,
-  } = params
-  const { s, i, r, d, p } = sirdModel({
-    beta,
-    gamma,
-    mu,
-    population,
-    infected,
-    recovered,
-    dead,
-    days,
-  })
+Chart.register(...registerables, zoomPlugin)
+
+export const SirdChart = () => {
+  const { value } = useValues()
+
+  const { s, i, r, d, p } = sirdModel(value)
 
   const labels = Array.from({ length: s.length }, (_, index) => index) // Days 0 to N
 
@@ -195,10 +179,10 @@ export const SirdChart = (params: sirdParams) => {
         }
       }
     }
-  }, [s, i, r, d, p, labels])
+  }, [value, s, i, r, d, p, labels])
 
   return (
-    <div className="h-full w-full">
+    <div className="mb-16 h-full w-full">
       {isLoading ? (
         <div className="flex h-full w-full flex-col items-center justify-center align-middle">
           <div className="h-12 w-12 animate-spin rounded-full border-4 border-gray-600 border-t-transparent ease-in" />
