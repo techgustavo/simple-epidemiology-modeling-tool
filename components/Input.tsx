@@ -16,13 +16,13 @@ export const Input: FC<InputFieldProps> = ({
 }) => {
   return (
     <div className="flex flex-col">
-      <label className="mb-2 block text-sm text-gray-600">{label}</label>
+      <label className="mb-2 block text-base text-gray-600">{label}</label>
       <input
         type="number"
         placeholder={placeholder}
         min={0}
         step={'any'}
-        className="w-auto appearance-none rounded border border-gray-200 px-3 py-2 text-gray-600"
+        className="rounded border border-gray-600 px-3 py-2 text-gray-600"
         required={required}
         onChange={onChange}
       />
