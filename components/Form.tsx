@@ -110,7 +110,7 @@ export const Form = () => {
         />
       </div>
       <button
-        className="w-full rounded border border-gray-300 bg-gray-300 p-3 hover:bg-gray-100 hover:outline-gray-300"
+        className="w-1/2 rounded border border-gray-600 bg-gray-600 p-3 text-gray-100 transition-colors duration-75 hover:bg-gray-100 hover:text-gray-600"
         onClick={(e) => {
           const form = document.getElementById('Form') as HTMLFormElement | null
           if (form) {
