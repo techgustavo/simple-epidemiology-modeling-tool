@@ -1,6 +1,6 @@
 # Simple Epidemiology Modeling Tool
 
-> This project uses the SIRD model (Susceptible, Infected, Recovered, Deceased) to simulate the spread of a disease through a population and returns a graphical representation of the results.
+This project uses the SIRD model (Susceptible, Infected, Recovered, Deceased) to simulate the spread of a disease through a population and returns a graphical representation of the results.
 
 ## Features
 
@@ -14,33 +14,33 @@
 
 - New Infections:
 
-  > $ \text{newInfected} = \frac{\beta \cdot S \cdot I}{\text{Population}} $
+  $ \text{newInfected} = \frac{\beta \cdot S \cdot I}{\text{Population}} $
   
 - New Recoveries:
 
-  > $ \text{newRecovered} = \gamma \cdot I $
+  $ \text{newRecovered} = \gamma \cdot I $
 
 - New Deaths:
 
-  > $ \text{newDeaths} = \mu \cdot I $
+  $ \text{newDeaths} = \mu \cdot I $
 
 ### Daily Updates
 
 - Susceptible ($S$) decreases by the number of new infections:
 
-  > $ S_{\text{new}} = S_{\text{old}} - \text{newInfected} $
+  $ S_{\text{new}} = S_{\text{old}} - \text{newInfected} $
 
 - Infected ($I$) increases by new infections and decreases by recoveries and deaths:
 
-  > $ I_{\text{new}} = I_{\text{old}} + \text{newInfected} - \text{newRecovered} - \text{newDeaths} $
+  $ I_{\text{new}} = I_{\text{old}} + \text{newInfected} - \text{newRecovered} - \text{newDeaths} $
 
 - Recovered ($R$) increases by the number of new recoveries:
 
-  > $ R_{\text{new}} = R_{\text{old}} + \text{newRecovered} $
+  $ R_{\text{new}} = R_{\text{old}} + \text{newRecovered} $
 
 - Deceased ($D$) increases by the number of new deaths:
 
-  > $ D_{\text{new}} = D_{\text{old}} + \text{newDeaths} $
+  $ D_{\text{new}} = D_{\text{old}} + \text{newDeaths} $
 
 
 This cycle continues for each day of the simulation to track the disease progression.
