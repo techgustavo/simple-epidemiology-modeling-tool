@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react'
 import { sirdModel } from '@/utils/sirdModel'
 import { Chart, registerables, TooltipItem, ChartConfiguration } from 'chart.js'
-import zoomPlugin from 'chartjs-plugin-zoom'
 import { useValues } from '@/contexts/values'
 
 const getChartConfig = (
@@ -83,17 +82,6 @@ const getChartConfig = (
       },
     },
     plugins: {
-      /* zoom: {
-        zoom: {
-          wheel: {
-            enabled: true,
-          },
-          pinch: {
-            enabled: true,
-          },
-          mode: 'xy',
-        },
-      }, */
       legend: {
         labels: {
           usePointStyle: true,
@@ -131,7 +119,7 @@ const getChartConfig = (
   },
 })
 
-Chart.register(...registerables, zoomPlugin)
+Chart.register(...registerables)
 
 export const SirdChart = () => {
   const { value } = useValues()
