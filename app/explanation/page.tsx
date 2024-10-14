@@ -7,7 +7,7 @@ export default function Home() {
       <div className="flex min-h-screen w-full flex-col items-center">
         <div className="m-16">
           <h1 className="text-3xl font-bold text-black">
-            Simple viral modeling tool
+            Simple Epidemiology Modeling Tool
           </h1>
           <div className="mt-2 flex items-center">
             <span className="mr-2 h-6 border-l-2 border-gray-400"></span>

@@ -5,7 +5,7 @@ export const Footer = () => {
     <footer className="flex w-full flex-col items-center justify-center gap-2 bg-gray-100 p-8">
       <div className="text-center">
         <h2 className="text-xl font-bold text-black">
-          Simple viral modeling tool
+          Simple Epidemiology Modeling Tool
         </h2>
         <a
           href="https://github.com/techgustavo"
@@ -16,7 +16,7 @@ export const Footer = () => {
         </a>
       </div>
       <a
-        href="https://github.com/techgustavo/simple-viral-modeling-tool"
+        href="https://github.com/techgustavo/simple-epidemiology-modeling-tool"
         target="_blank"
         rel="noopener noreferrer"
       >
