@@ -1,4 +1,4 @@
-# Simple Epidemiology Modeling Tool
+# [Simple Epidemiology Modeling Tool](https://epidemiologytool.vercel.app/)
 
 This project uses the SIRD model (Susceptible, Infected, Recovered, Deceased) to simulate the spread of a disease through a population and returns a graphical representation of the results.
 
