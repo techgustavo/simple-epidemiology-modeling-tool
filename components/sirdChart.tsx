@@ -169,16 +169,36 @@ export const SirdChart = () => {
     }
   }, [value, s, i, r, d, p, labels])
 
+  const handleDownload = () => {
+    const canvas = document.getElementById('sirdChart') as HTMLCanvasElement
+    if (canvas) {
+      const link = document.createElement('a')
+      link.href = canvas.toDataURL('image/png')
+      link.download = 'sird-chart.png'
+      link.click()
+    }
+  }
+
   return (
-    <div className="mb-16 h-full w-full">
-      {isLoading ? (
-        <div className="flex h-full w-full flex-col items-center justify-center align-middle">
-          <div className="h-12 w-12 animate-spin rounded-full border-4 border-gray-600 border-t-transparent ease-in" />
-          <canvas id="sirdChart" style={{ display: 'none' }} />
-        </div>
-      ) : (
-        <canvas id="sirdChart" />
-      )}
-    </div>
+    <>
+      <div className="flex h-full w-full flex-col">
+        {isLoading ? (
+          <div className="flex h-full w-full flex-col items-center justify-center align-middle">
+            <div className="h-12 w-12 animate-spin rounded-full border-4 border-gray-600 border-t-transparent ease-in" />
+            <canvas id="sirdChart" style={{ display: 'none' }} />
+          </div>
+        ) : (
+          <canvas id="sirdChart" />
+        )}
+      </div>
+      <div className="mb-16 mt-8 flex h-fit w-full max-w-3xl align-middle">
+        <button
+          className="mx-auto w-1/4 rounded border border-gray-600 px-3 py-2 text-gray-600 transition-colors duration-75 hover:bg-gray-100"
+          onClick={() => handleDownload()}
+        >
+          Download
+        </button>
+      </div>
+    </>
   )
 }
