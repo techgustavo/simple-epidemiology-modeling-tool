@@ -191,14 +191,16 @@ export const SirdChart = () => {
           <canvas id="sirdChart" />
         )}
       </div>
-      <div className="mb-16 mt-8 flex h-fit w-full max-w-3xl align-middle">
-        <button
-          className="mx-auto w-1/4 rounded border border-gray-600 px-3 py-2 text-gray-600 transition-colors duration-75 hover:bg-gray-100"
-          onClick={() => handleDownload()}
-        >
-          Download
-        </button>
-      </div>
+      {!isLoading && (
+        <div className="mb-16 mt-8 flex h-fit w-full max-w-3xl align-middle">
+          <button
+            className="mx-auto w-1/4 rounded border border-gray-600 px-3 py-2 text-gray-600 transition-colors duration-75 hover:bg-gray-100"
+            onClick={() => handleDownload()}
+          >
+            Download
+          </button>
+        </div>
+      )}
     </>
   )
 }
