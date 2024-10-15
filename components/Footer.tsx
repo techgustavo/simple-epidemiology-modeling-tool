@@ -5,12 +5,20 @@ export const Footer = () => {
     <footer className="flex w-full flex-col items-center justify-center gap-2 bg-gray-100 p-8">
       <div className="text-center">
         <h2 className="text-xl font-bold text-black">
-          Simple Epidemiology Modeling Tool
+          <a
+            href="https://github.com/techgustavo/simple-epidemiology-modeling-tool"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:underline"
+          >
+            Simple epidemiology modeling tool
+          </a>
         </h2>
         <a
           href="https://github.com/techgustavo"
           target="_blank"
           rel="noopener noreferrer"
+          className="hover:underline"
         >
           Gustavo Rodrigues
         </a>
