@@ -2,7 +2,6 @@ import { SirdChart } from '@/components/sirdChart'
 import { Footer } from '@/components/Footer'
 import { Form } from '@/components/Form'
 import { ValuesProvider } from '@/contexts/values'
-import Link from 'next/link'
 
 export default function Home() {
   return (
@@ -13,10 +12,15 @@ export default function Home() {
             Simple epidemiology modeling tool
           </h1>
           <div className="mt-2 flex items-center">
-            <span className="mr-2 h-6 border-l-2 border-gray-400"></span>
-            <Link href={'/explanation'} className="text-xl text-gray-400">
+            <span className="peer mr-2 h-6 border-l-2 border-gray-400"></span>
+            <a
+              href="https://github.com/techgustavo/simple-epidemiology-modeling-tool"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xl text-gray-400"
+            >
               How it works?
-            </Link>
+            </a>
           </div>
         </div>
         <div className="max-w-3xl">
